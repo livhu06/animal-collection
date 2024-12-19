@@ -49,7 +49,7 @@ jobs:
           base64 -d android/animalCollections.jks.base64 > android/animalCollections.decrypted.jks
 
       - name: Sign dev build
-        run: jarsigner -keystore android/animalCollections.decrypted.jks -storepass "${{ secrets.RELEASE_KEYSTORE_PASSWORD }}" -signedjar android/app/release/app-release-signed.aab AnimalCollect
+        run: jarsigner -keystore android/animalCollections.decrypted.jks -storepass "${{ secrets.RELEASE_KEYSTORE_PASSWORD }}" -signedjar android/app/release/app-release.aab AnimalCollect
 
       - name: Check folder content of android output
         run: ls ./android/app/release
