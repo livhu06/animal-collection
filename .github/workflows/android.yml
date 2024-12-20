@@ -58,7 +58,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: release-artifacts
-          paths: |
+          path: |
             ./android/app/build/outputs/apk/release/
             ./android/app/build/outputs/bundle/release
 
