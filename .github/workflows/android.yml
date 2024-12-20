@@ -58,22 +58,16 @@ jobs:
         run: ls ./android/app/build/outputs/bundle/release
 
 
-      - name: Upload Release Build to Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: release-artifacts
-          path: |
-            ./android/app/build/outputs/apk/release/
-            ./android/app/build/outputs/bundle/release
+      - name: Set Tag
+        id: current-datetime
+        run: echo "CURRENT_DATETIME=$(date +'%Y-%m-%d-%H_%M_%S%z')" >> "$GITHUB_OUTPUT"
 
-      - name: Create Github Release
-        uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          generate_release_notes: true
-          prerelease: true
-          files: |
-            ./android/app/build/outputs/apk/debug/app-debug.apk
-            ./android/app/build/outputs/bundle/release/app-release-signed.aab
+      - name: Build Release
+        shell: bash
+        run: |
+          gh release create ${{ steps.current-datetime.outputs.CURRENT_DATETIME }} \
+          -t ${{ steps.current-datetime.outputs.CURRENT_DATETIME }} \
+          -a ./android/app/build/outputs/bundle/release/app-release-signed.aab \
+          -a ./android/app/build/outputs/apk/debug/app-debug.apk
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
