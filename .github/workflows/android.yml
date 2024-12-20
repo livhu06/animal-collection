@@ -64,7 +64,7 @@ jobs:
         run: |
           gh release create ${{ steps.current-datetime.outputs.CURRENT_DATETIME }} \
           -t ${{ steps.current-datetime.outputs.CURRENT_DATETIME }} \
-          --assets ./android/app/build/outputs/bundle/release/app-release-signed.aab \
-          --assets ./android/app/build/outputs/apk/debug/app-debug.apk
+          ./android/app/build/outputs/bundle/release/app-release-signed.aab \
+          ./android/app/build/outputs/apk/debug/app-debug.apk
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
