@@ -5,12 +5,11 @@ on:
     branches:
       - main
     tags:
-      -v*
+      - v*
 jobs:
   build:
     name: Build APK
     runs-on: ubuntu-latest
-  
 
     steps:
       - name: Checkout source
